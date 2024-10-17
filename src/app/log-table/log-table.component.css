@@ -1,0 +1,36 @@
+table {
+    transition: .2s;
+
+    & th {
+        font-size: 10pt;
+        cursor: pointer;
+    }
+
+    & th:hover {
+        background-color: #f5f5f5;
+        color: #5e5e5e;
+    }
+
+    & td {
+        font-size: 9pt;
+        padding: 5px;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    & td:hover {
+        color: #5e5e5e;
+    }
+
+    .table-info {
+        font-weight: bold;
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}

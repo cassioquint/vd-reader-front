@@ -1,0 +1,42 @@
+.details-viewer {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    position: fixed;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    overflow: auto;
+    font-size: 10pt;
+
+    & p {
+        margin-bottom: 5px;
+    }
+
+    & h6 {
+        margin-top: 1rem;
+    }
+
+    & li {
+        font-size: 8pt;
+    }
+}
+
+.alert {
+    transition: .2s;
+    position: fixed;
+    bottom: 0;
+    opacity: 1%;
+    left: -18rem;
+
+    & i {
+        font-size: 13pt;
+        margin-right: .5rem;
+    }
+}
+
+.alert-show {
+    left: 10px;
+    opacity: 100%;
+}

@@ -1,0 +1,13 @@
+form {
+    position: fixed;
+    height: 100vh;
+    padding: 2rem;
+}
+
+h6 {
+    font-size: 11pt;
+}
+
+.form-control {
+    font-size: 9pt;
+}

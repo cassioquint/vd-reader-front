@@ -1,0 +1,21 @@
+<div class="bg-light details-viewer">
+    <h4>Detalhes</h4>
+    <hr>
+    <div *ngIf="log">
+        <p><strong>Início:</strong> {{ log.startedAt }}</p>
+        <p><strong>Fim:</strong> {{ log.finishedAt }}</p>
+        <p><strong>Duração:</strong> {{ log.duration }}</p>
+        <h6>Logs:</h6>
+        <ul>
+            <li *ngFor="let entry of log.logsList">{{ entry }}</li>
+        </ul>
+        <div class="d-grid gap-2 col-4 mx-auto" *ngIf="log.logsList.length > 0">
+            <button type="button" class="btn btn-secondary" (click)="copyToClipboard()">Copiar</button>
+        </div>
+        <p *ngIf="log.logsList.length === 0">Sem registros</p>
+    </div>
+    <div class="alert alert-info" role="alert" id="alert-box">
+        <i class="fa-solid fa-copy"></i>
+        Registros copiados para o clipboard.
+    </div>
+</div>

@@ -1,0 +1,31 @@
+.main-container {
+    width: 100%;
+
+    & .navbar-container {
+        left: 0;
+        top: 0;
+        width: 100%;
+        position: fixed;
+    }
+
+    & .work-container {
+        padding-top: 55px;
+        display: flex;
+        width: 100%;
+
+        & .sidebar-container {
+            min-width: 230px;
+            height: 100vh;
+        }
+
+        & .table-container {
+            width: 100%;
+        }
+
+        & .details-container {
+            position: relative;
+            min-width: 400px;
+            height: 100vh;;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+<div class="main-container">
+  <div class="work-container">
+    <div class="sidebar-container">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="table-container">
+      <app-log-table (logSelected)="onLogSelected($event)"></app-log-table>
+    </div>
+    <div class="details-container">
+      <app-log-details [log]="selectedLog"></app-log-details>
+    </div>
+    <div class="navbar-container">
+      <app-navbar></app-navbar>
+    </div>
+  </div>
+</div>

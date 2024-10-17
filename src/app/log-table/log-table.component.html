@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" (click)="sort('id')">
+                    Índice &nbsp;
+                    <i id="sort-id" class="fas fa-sort sort-icons"></i>
+                </th>
+                <th scope="col" (click)="sort('title')">
+                    Título &nbsp;
+                    <i id="sort-title" class="fas fa-sort sort-icons"></i>
+                </th>
+                <th scope="col" (click)="sort('numRegs')">
+                    N. Registros &nbsp;
+                    <i id="sort-numRegs" class="fas fa-sort sort-icons"></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let log of sortedLogs"
+                [class.table-info]="log.id === selectedLogId" 
+                [attr.id]="'log-' + log.id"
+                (click)="selectLog(log)">
+                <td class="center">{{ log.id }}</td>
+                <td class="log-title">{{ log.title }}</td>
+                <td class="num-regs center">{{ log.numRegs }}</td>
+                <td class="log-list hidden">{{ log | json }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

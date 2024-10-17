@@ -1,0 +1,21 @@
+<form class="bg-light">
+  <h4>Filtros</h4>
+  <hr>
+
+  <label for="title">
+    <h6>Título</h6>
+  </label>
+  <input id="title" type="text" class="form-control mb-3" (input)="filterByTitle()">
+
+  <label for="keywords">
+    <h6>Palavras-chave</h6>
+  </label>
+  <input id="keywords" type="text" class="form-control mb-3" (input)="filterByKeywords()">
+
+  <label for="withRegs">
+    <h6>Somente com registros</h6>
+  </label><br>
+  <input type="checkbox" id="withRegs" class="form-check-input" (change)="filterRows()">
+
+  <hr>
+</form>
