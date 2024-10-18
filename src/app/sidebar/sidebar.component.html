@@ -1,4 +1,4 @@
-<form class="bg-light">
+<form class="bg-light form-filter">
   <h4>Filtros</h4>
   <hr>
 
@@ -19,3 +19,23 @@
 
   <hr>
 </form>
+
+<script>
+  const fixedChild = document.querySelector('.form-filter');
+  const parent = document.querySelector('.sidebar-container');
+
+  function adjustWidth() {
+    // Define a largura do elemento fixo igual à do pai
+    fixedChild.style.width = `${parent.offsetWidth}px`;
+    // Define a posição horizontal do elemento fixo igual à do pai
+    fixedChild.style.left = `${parent.getBoundingClientRect().left}px`;
+    console.log("ajustou")
+  }
+
+  // Ajusta a largura e posição inicial
+  adjustWidth();
+
+  // Ajusta a largura e posição ao redimensionar a janela
+  window.addEventListener('resize', adjustWidth);
+  window.addEventListener('scroll', adjustWidth);
+</script>
