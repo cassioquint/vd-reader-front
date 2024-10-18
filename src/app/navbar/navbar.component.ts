@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
+  @Output() dateChanged = new EventEmitter<string>();
+
   currentDate: string = '';
 
   ngOnInit() {
@@ -18,5 +20,10 @@ export class NavbarComponent implements OnInit {
     const day = ('0' + today.getDate()).slice(-2);
 
     this.currentDate = `${year}-${month}-${day}`;
+  }
+
+  onDateChange(event: any) {
+    const selectedDate = event.target.value;
+    this.dateChanged.emit(selectedDate);
   }
 }

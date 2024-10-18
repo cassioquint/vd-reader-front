@@ -22,10 +22,13 @@ import { LogDetailsComponent } from './log-details/log-details.component';
 export class AppComponent {
   title = 'vd-reader';
   selectedLog: any = null;
-
-  constructor(private logService: LogService) {}
+  selectedDate: string | undefined = undefined;
 
   onLogSelected(log: any) {
     this.selectedLog = log;
+  }
+
+  onDateChange(date: string) {
+    this.selectedDate = date;
   }
 }

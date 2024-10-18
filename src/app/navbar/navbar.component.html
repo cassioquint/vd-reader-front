@@ -6,7 +6,13 @@
     <form>
       <div class="form-date">
         <label for="logs-date" class="form-label">Data</label>
-        <input id="logs-date" class="form-control" type="date" [(ngModel)]="currentDate" name="logs-date">
+        <input
+          id="logs-date"
+          class="form-control"
+          type="date"
+          [(ngModel)]="currentDate"
+          (change)="onDateChange($event)"
+          name="logs-date">
       </div>
     </form>
   </div>

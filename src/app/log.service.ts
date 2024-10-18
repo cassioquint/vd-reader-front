@@ -10,7 +10,9 @@ export class LogService {
 
   constructor(private http: HttpClient) {}
 
-  getLogs(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getLogs(date?: string): Observable<any[]> {
+
+    const url = date ? `${this.apiUrl}${date}` : this.apiUrl;
+    return this.http.get<any[]>(url);
   }
 }

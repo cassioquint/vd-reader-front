@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LogService } from '../log.service';
 
@@ -10,6 +10,7 @@ import { LogService } from '../log.service';
   styleUrl: './log-table.component.css'
 })
 export class LogTableComponent implements OnInit {
+  @Input() selectedDate: string | undefined = undefined;
   @Output() logSelected = new EventEmitter<number>();
 
   logs: any[] = [];
@@ -23,7 +24,18 @@ export class LogTableComponent implements OnInit {
   constructor(private logService: LogService) {}
 
   ngOnInit(): void {
-    this.logService.getLogs().subscribe((data) => {
+    this.fetchLogs();
+  }
+
+  ngOnChanges(): void {
+    if (this.selectedDate) {
+      this.fetchLogs();
+    }
+    this.selectLog("")
+  }
+
+  fetchLogs(): void {
+    this.logService.getLogs(this.selectedDate).subscribe((data) => {
       this.logs = data;
       this.sortedLogs = [...this.logs];
     });
@@ -64,7 +76,7 @@ export class LogTableComponent implements OnInit {
     this.logSelected.emit(log);
   }
 
-  setSortIconDirection(col: string, dir: Boolean) {
+  setSortIconDirection(col: string, dir: boolean) {
 
     // Inicializa todos os ícones
     const sortIcons = document.querySelectorAll<HTMLElement>('.sort-icons')
