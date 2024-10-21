@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LogService } from '../log.service';
 
 @Component({
   selector: 'app-log-details',
@@ -11,19 +12,12 @@ import { CommonModule } from '@angular/common';
 export class LogDetailsComponent {
   @Input() log: any;
 
-  copyToClipboard() {
-    if (this.log && this.log.logsList) {
-      const logsText = this.log.logsList.join('\n');
+  constructor(private logService: LogService) {}
 
-      navigator.clipboard.writeText(logsText).then(() => {
-        const alert = document.getElementById("alert-box") as HTMLDivElement
-        alert.classList.add("alert-show")
-        setTimeout(() => {
-          alert.classList.remove('alert-show');
-        }, 3000);
-      }).catch(err => {
-        console.error('Erro ao copiar o texto', err);
-      });
-    }
+  goToLine(lineNumber: number): void {
+    
+    this.logService.openFile(lineNumber).subscribe((data) => {
+      console.log(data)
+    });
   }
 }

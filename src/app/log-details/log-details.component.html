@@ -2,6 +2,7 @@
     <h4>Detalhes</h4>
     <hr>
     <div *ngIf="log">
+        <h6>Programa: {{ log.bat }}</h6>
         <p><strong>Início:</strong> {{ log.startedAt }}</p>
         <p><strong>Fim:</strong> {{ log.finishedAt }}</p>
         <p><strong>Duração:</strong> {{ log.duration }}</p>
@@ -9,8 +10,8 @@
         <ul>
             <li *ngFor="let entry of log.logsList">{{ entry }}</li>
         </ul>
-        <div class="d-grid gap-2 col-4 mx-auto" *ngIf="log.logsList.length > 0">
-            <button type="button" class="btn btn-secondary" (click)="copyToClipboard()">Copiar</button>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="button" class="btn btn-secondary" (click)="goToLine(log.fileLine)">Ir para a linha</button>
         </div>
         <p *ngIf="log.logsList.length === 0">Sem registros</p>
     </div>
