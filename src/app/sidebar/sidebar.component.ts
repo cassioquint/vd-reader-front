@@ -11,9 +11,9 @@ export class SidebarComponent {
 
   filterRows() {
     const titleInput = document.getElementById('title') as HTMLInputElement;
-    titleInput.value = ""
+    titleInput.value = "";
     const keywords = document.getElementById('keywords') as HTMLInputElement;
-    keywords.value = ""
+    keywords.value = "";
 
     const checkbox = document.getElementById('withRegs') as HTMLInputElement;
     const tableRows = document.querySelectorAll<HTMLElement>('tbody tr');
@@ -23,9 +23,9 @@ export class SidebarComponent {
       const numRegs = Number(numRegsCell?.textContent);
 
       if (checkbox.checked && numRegs === 0) {
-        row.style.display = 'none';
+        row.classList.add('hidden')
       } else {
-        row.style.display = '';
+        row.classList.remove('hidden')
       }
     });
   }

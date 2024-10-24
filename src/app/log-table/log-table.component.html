@@ -1,27 +1,33 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col" (click)="sort('id')">
-                Índice &nbsp;
+            <th scope="col" (click)="sort('id')" title="Ordenar por índice">
+                Id. &nbsp;
                 <i id="sort-id" class="fas fa-sort sort-icons"></i>
             </th>
-            <th scope="col" (click)="sort('title')">
+            <th scope="col" (click)="sort('title')" title="Ordenar por título">
                 Título &nbsp;
                 <i id="sort-title" class="fas fa-sort sort-icons"></i>
             </th>
-            <th scope="col" (click)="sort('numRegs')">
-                N. Registros &nbsp;
+            <th scope="col" (click)="sort('numRegs')" title="Ordenar por número de registros">
+                N. Regs. &nbsp;
                 <i id="sort-numRegs" class="fas fa-sort sort-icons"></i>
             </th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let log of sortedLogs" [class.table-info]="log.id === selectedLogId" [attr.id]="'log-' + log.id"
-            (click)="selectLog(log)">
+        <tr 
+            *ngFor="let log of sortedLogs"
+            [class.table-info]="log.id === selectedLogId"
+            [class.hidden]="log.numRegs === 0"
+            [attr.id]="'log-' + log.id"
+            (click)="selectLog(log)"
+        >
             <td class="center">{{ log.id }}</td>
             <td class="log-title">{{ log.title }}</td>
             <td class="num-regs center">{{ log.numRegs }}</td>
             <td class="log-list hidden">{{ log | json }}</td>
         </tr>
     </tbody>
+    <p *ngIf="sortedLogs.length === 0">Sem registros</p>
 </table>

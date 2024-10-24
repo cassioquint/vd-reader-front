@@ -18,12 +18,10 @@ table {
         cursor: pointer;
     }
 
-    & td:hover {
-        color: #5e5e5e;
-    }
-
-    .table-info {
-        font-weight: bold;
+    & tr:hover {
+        & td {
+            color: #5e5e5e;
+        }
     }
 }
 

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LogService } from './log.service';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LogTableComponent } from './log-table/log-table.component';

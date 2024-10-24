@@ -11,7 +11,7 @@ import { LogService } from '../log.service';
 })
 export class LogTableComponent implements OnInit {
   @Input() selectedDate: string | undefined = undefined;
-  @Output() logSelected = new EventEmitter<number>();
+  @Output() logSelected = new EventEmitter<any>();
 
   logs: any[] = [];
   selectedLogId: number | null = null;
@@ -35,8 +35,10 @@ export class LogTableComponent implements OnInit {
   }
 
   fetchLogs(): void {
-    this.logService.getLogs(this.selectedDate).subscribe((data) => {
-      this.logs = data;
+    this.logService.getLogs(this.selectedDate).subscribe();
+
+    this.logService.logs$.subscribe((logData) => {
+      this.logs = logData;
       this.sortedLogs = [...this.logs];
     });
   }
@@ -77,8 +79,6 @@ export class LogTableComponent implements OnInit {
   }
 
   setSortIconDirection(col: string, dir: boolean) {
-
-    // Inicializa todos os ícones
     const sortIcons = document.querySelectorAll<HTMLElement>('.sort-icons')
     sortIcons.forEach(i => {
       i.classList.remove("fa-sort-up")
@@ -86,7 +86,6 @@ export class LogTableComponent implements OnInit {
       i.classList.add("fa-sort")
     })
 
-    // Define o novo ícone conforme direção da ordenação
     const icoColumn = document.getElementById("sort-" + col) as HTMLElement
     icoColumn.classList.remove("fa-sort")
     if(dir) {
