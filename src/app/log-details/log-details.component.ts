@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LogService } from '../log.service';
+import { UrlGeneratorService } from '../url-generator.service'
 
 @Component({
   selector: 'app-log-details',
@@ -13,9 +14,8 @@ export class LogDetailsComponent implements OnInit {
   @Input() log: any;
 
   fileName: string = '';
-  ranegao: string = '';
 
-  constructor(private logService: LogService) {}
+  constructor(private logService: LogService, private urlGeneratorService: UrlGeneratorService) {}
 
   ngOnInit(): void {
     this.logService.file$.subscribe(file => {
@@ -30,8 +30,6 @@ export class LogDetailsComponent implements OnInit {
   }
 
   getWikiURL(): string {
-    let urlBase = "http://intranet/wiki/index.php/Verifica%C3%A7%C3%A3o_di%C3%A1ria_dos_fontes_do_SIGER";
-    let subtitle = this.log ? encodeURIComponent(this.log.title.replace(/ /g, '_')) : '';
-    return `${urlBase}#${subtitle}`
+    return this.urlGeneratorService.generateWikiUrl(this.log?.title);
   }
 }
