@@ -2,20 +2,29 @@
   <h4>Filtros</h4>
   <hr>
 
-  <label for="title">
-    <h6>Título</h6>
-  </label>
-  <input id="title" type="text" class="form-control mb-3" (input)="filterByTitle()">
+  <label for="title"><h6>Título</h6></label>
+  <div class="input-container">
+    <input #title id="title" type="text" class="form-control mb-3" (input)="filter(title.id)">
+    <i class="fa-solid fa-xmark" (click)="clearField(title.id)"></i>
+  </div>
+  
 
-  <label for="keywords">
+  <label>
     <h6>Palavras-chave</h6>
+    <i #keywordsInfo class="fa-solid fa-circle-info"
+      data-bs-toggle="popover"
+      data-bs-content='É possível utilizar expressão-regular. Exemplo: "/SL.*?\.CPY/" (sem aspas)'
+      title="Dica:">
+    </i>
   </label>
-  <input id="keywords" type="text" class="form-control mb-3" (input)="filterByKeywords()">
+  <div class="input-container">
+    <input #keywords id="keywords" type="text" class="form-control mb-3" (input)="filter(keywords.id)">
+    <i class="fa-solid fa-xmark" (click)="clearField(keywords.id)"></i>
+  </div>
 
-  <label for="withRegs">
-    <h6>Somente com registros</h6>
-  </label><br>
-  <input type="checkbox" checked id="withRegs" class="form-check-input" (change)="filterRows()">
+  <label for="withRegs"><h6>Somente com registros</h6></label>
+  <br>
+  <input #withRegs id="withRegs" type="checkbox" checked class="form-check-input" (change)="filter(withRegs.id)">
 
   <hr>
 </form>

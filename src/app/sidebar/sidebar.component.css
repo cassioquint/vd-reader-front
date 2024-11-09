@@ -8,9 +8,31 @@ form {
 }
 
 h6 {
+    display: inline;
     font-size: 11pt;
+}
+
+i {
+    margin-left: .5rem;
+    cursor: pointer;
+    color: #6d88d8;
 }
 
 .form-control {
     font-size: 9pt;
+}
+
+.input-container {
+    position: relative;
+
+    & i {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(-50%, -50%);
+    }
+
+    & i:active {
+        color: #98adec;
+    }
 }

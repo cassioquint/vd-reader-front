@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LogTableComponent } from './log-table/log-table.component';
@@ -19,6 +19,8 @@ import { LogDetailsComponent } from './log-details/log-details.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  @ViewChild(SidebarComponent) sidebarComponent!: SidebarComponent;
+
   title = 'vd-reader';
   selectedLog: any = null;
   selectedDate: string | undefined = undefined;
@@ -29,5 +31,9 @@ export class AppComponent {
 
   onDateChange(date: string) {
     this.selectedDate = date;
+
+    if (this.sidebarComponent) {
+      this.sidebarComponent.clearFilters();
+    }
   }
 }

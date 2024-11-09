@@ -2,22 +2,22 @@
     <h4>Detalhes</h4>
     <h6>
         Programa:
-        <a target="_blank" href="{{ getWikiURL() }}">{{ log.bat }}</a>
+        <a target="_blank" href="{{ getWikiURL() }}">{{ log['bat'] }}</a>
     </h6>
     <hr>
-    <p class="mt-1"><strong>E-mail enviado: </strong>{{ log.sendEmail ? 'Sim' : 'Não' }}</p>
+    <p class="mt-1"><strong>E-mail enviado: </strong>{{ log['sendEmail'] ? 'Sim' : 'Não' }}</p>
     <p class="d-flex justify-content-between">
-        <span><strong>Início:</strong> {{ log.startedAt }}</span>
-        <span><strong>Fim:</strong> {{ log.finishedAt }}</span>
+        <span><strong>Início:</strong> {{ log['startedAt'] }}</span>
+        <span><strong>Fim:</strong> {{ log['finishedAt'] }}</span>
     </p>
-    <p><strong>Duração:</strong> {{ log.duration }}</p>
+    <p><strong>Duração:</strong> {{ log['duration'] }}</p>
     <h6>Logs:</h6>
     <ul>
-        <li *ngFor="let entry of log.logsList">{{ entry }}</li>
+        <li *ngFor="let entry of log['logsList']">{{ entry }}</li>
     </ul>
-    <p *ngIf="log.logsList.length === 0">Sem registros</p>
+    <p *ngIf="log['logsList'].length === 0">Sem registros</p>
     <div class="d-grid gap-2 col-6 mx-auto">
-        <button type="button" class="btn btn-secondary" (click)="goToLine(log.fileLine)">Ir para a linha</button>
+        <button type="button" class="btn btn-secondary" (click)="goToLine(log['fileLine'])">Ir para a linha</button>
     </div>
     <div class="alert alert-info" role="alert" id="alert-box">
         <i class="fa-solid fa-copy"></i>

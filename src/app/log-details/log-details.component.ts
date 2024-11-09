@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LogService } from '../log.service';
 import { UrlGeneratorService } from '../url-generator.service'
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-log-details',
@@ -10,22 +11,33 @@ import { UrlGeneratorService } from '../url-generator.service'
   templateUrl: './log-details.component.html',
   styleUrl: './log-details.component.css'
 })
-export class LogDetailsComponent implements OnInit {
-  @Input() log: any;
+export class LogDetailsComponent implements OnInit, OnDestroy {
+  @Input() log!: { title: string; [key: string]: any };
 
   fileName: string = '';
+  private fileSubscription!: Subscription;
 
-  constructor(private logService: LogService, private urlGeneratorService: UrlGeneratorService) {}
+  constructor (
+    private logService: LogService,
+    private urlGeneratorService: UrlGeneratorService
+  ) {}
 
   ngOnInit(): void {
-    this.logService.file$.subscribe(file => {
-      this.fileName = file;
-    });
+    this.fileSubscription = this.logService.file$.subscribe(
+      (file) => (this.fileName = file)
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.fileSubscription) {
+      this.fileSubscription.unsubscribe();
+    }
   }
 
   goToLine(lineNumber: number): void {
-    this.logService.openFile(lineNumber, this.fileName).subscribe((data) => {
-      console.log(data)
+    this.logService.openFile(lineNumber, this.fileName).subscribe({
+      next: (data) => console.log(data),
+      error: (err) => console.error('Error opening file:', err)
     });
   }
 

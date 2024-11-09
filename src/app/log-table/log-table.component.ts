@@ -1,7 +1,6 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, AfterViewInit, EventEmitter, Input, Output, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LogService } from '../log.service';
-
 @Component({
   selector: 'app-log-table',
   standalone: true,
@@ -9,12 +8,12 @@ import { LogService } from '../log.service';
   templateUrl: './log-table.component.html',
   styleUrl: './log-table.component.css'
 })
-export class LogTableComponent implements OnInit {
+export class LogTableComponent implements AfterViewInit {
   @Input() selectedDate: string | undefined = undefined;
   @Output() logSelected = new EventEmitter<any>();
 
   logs: any[] = [];
-  selectedLogId: number | null = null;
+  selectedLogId: number = 0;
   sortedLogs: any[] = [];
   filteredLogs: any[] = [];
   onlyWithRegs: boolean = false;
@@ -23,7 +22,7 @@ export class LogTableComponent implements OnInit {
 
   constructor(private logService: LogService) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.fetchLogs();
   }
 
@@ -62,20 +61,56 @@ export class LogTableComponent implements OnInit {
     });
   }
 
-  filterLogs(event: Event) {
-    const checkbox = event.target as HTMLInputElement;
-    this.onlyWithRegs = checkbox.checked;
-
-    if (this.onlyWithRegs) {
-      this.filteredLogs = this.logs.filter(log => log.numRegs > 0);
-    } else {
-      this.filteredLogs = [...this.logs];
-    }
-  }
-
   selectLog(log: any) {
     this.selectedLogId = log.id;
     this.logSelected.emit(log);
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'Home':
+        this.navigateToFirstLog();
+        event.preventDefault();
+        break;
+      case 'End':
+        this.navigateToLastLog();
+        event.preventDefault();
+        break;
+      case 'ArrowUp':
+        this.navigateByArrow(-1);
+        event.preventDefault();
+        break;
+      case 'ArrowDown':
+        this.navigateByArrow(1);
+        event.preventDefault();
+        break;
+    }
+  }
+
+  private navigateToFirstLog() {
+    this.selectedLogId = 1;
+    this.selectLog(this.logs[0]);
+  }
+
+  private navigateToLastLog() {
+    this.selectedLogId = this.logs.length -1;
+    this.selectLog(this.logs[this.selectedLogId -1]);
+  }
+
+  private navigateByArrow(direction: number) {
+    if (!this.selectedLogId) {
+      this.navigateToFirstLog();
+    } else {
+      this.navigateLog(direction);
+    }
+  }
+
+  private navigateLog(direction: number) {
+    const newIndex = this.selectedLogId + direction;
+    if (newIndex >= 0 && newIndex < this.logs.length) {
+      this.selectLog(this.logs[newIndex - 1]);
+    }
   }
 
   setSortIconDirection(col: string, dir: boolean) {
