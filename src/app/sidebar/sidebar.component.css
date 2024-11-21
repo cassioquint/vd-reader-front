@@ -8,14 +8,7 @@ form {
 }
 
 h6 {
-    display: inline;
     font-size: 11pt;
-}
-
-i {
-    margin-left: .5rem;
-    cursor: pointer;
-    color: #6d88d8;
 }
 
 .form-control {

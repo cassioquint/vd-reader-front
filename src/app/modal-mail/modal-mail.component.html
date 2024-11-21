@@ -1,0 +1,24 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modalLabel" (hidden.bs.modal)="clearMailInfo()">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">E-mails enviados</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p *ngIf="mailInfoData.length > 0; else noData">
+          <strong>Informações do e-mail:</strong>
+        </p>
+        <ul>
+          <li *ngFor="let info of mailInfoData">{{ info }}</li>
+        </ul>
+        <ng-template #noData>
+          <p>Não há informações disponíveis.</p>
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LogTableComponent } from './log-table/log-table.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LogDetailsComponent } from './log-details/log-details.component';
+import { ModalMailComponent } from './modal-mail/modal-mail.component';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,11 @@ import { LogDetailsComponent } from './log-details/log-details.component';
     NavbarComponent,
     SidebarComponent,
     LogTableComponent,
-    LogDetailsComponent
+    LogDetailsComponent,
+    ModalMailComponent
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   @ViewChild(SidebarComponent) sidebarComponent!: SidebarComponent;

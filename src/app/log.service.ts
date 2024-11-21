@@ -9,13 +9,13 @@ import { tap } from 'rxjs/operators';
 export class LogService {
   private apiUrl = 'http://localhost:3000/';
 
-  // Subjects para armazenar logs e nome de arquivo
   private logsSubject = new BehaviorSubject<any[]>([]);
   private fileSubject = new BehaviorSubject<string>('');
+  private mailInfoSubject = new BehaviorSubject<string[]>([]);
 
-  // Expor os observables para acesso externo
   logs$ = this.logsSubject.asObservable();
   file$ = this.fileSubject.asObservable();
+  mailInfo$ = this.mailInfoSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -26,6 +26,7 @@ export class LogService {
     }
 
     const url = date ? `${this.apiUrl}${date}` : this.apiUrl;
+    
     return this.http.get<any[]>(url).pipe(
       tap((response: any) => {
         const logData = response?.data || [];
@@ -41,10 +42,18 @@ export class LogService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post<any>(url, body, { headers });
+  }
 
-    /*
-    const url = `${this.apiUrl}line/${lineNumber}`;
-    return this.http.get<any[]>(url);
-    */
+  fetchMailInfo(bat: string, date: string): Observable<any> {
+    const url = `${this.apiUrl}${bat}/${date}`;
+    return this.http.get<string[]>(url).pipe(
+      tap((response: string[]) => {
+        this.mailInfoSubject.next(response);
+      })
+    );
+  }
+
+  setMailInfo(data: string[]): void {
+    this.mailInfoSubject.next(data);
   }
 }

@@ -5,7 +5,11 @@
         <a target="_blank" href="{{ getWikiURL() }}">{{ log['bat'] }}</a>
     </h6>
     <hr>
-    <p class="mt-1"><strong>E-mail enviado: </strong>{{ log['sendEmail'] ? 'Sim' : 'Não' }}</p>
+    <p class="mt-1 inline"><strong>E-mail enviado: </strong>{{ log['sendEmail'] ? 'Sim' : 'Não' }}</p>
+    <i *ngIf="log['sendEmail']" id="mailInfo" #mailInfo class="fa-solid fa-circle-info informative"
+      data-bs-toggle="modal" data-bs-target="#exampleModal"
+      (click)="fetchMailInfo(log['bat'])">
+    </i>
     <p class="d-flex justify-content-between">
         <span><strong>Início:</strong> {{ log['startedAt'] }}</span>
         <span><strong>Fim:</strong> {{ log['finishedAt'] }}</span>
@@ -24,3 +28,12 @@
         Registros copiados para o clipboard.
     </div>
 </div>
+
+<script>
+    var myModal = document.getElementById('exampleModal')
+    var myInput = document.getElementById('mailInfo')
+
+    myModal.addEventListener('shown.bs.modal', function () {
+    myInput.click()
+    })
+</script>

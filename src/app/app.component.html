@@ -10,8 +10,14 @@
       </app-log-table>
     </div>
     <div class="details-container">
-      <app-log-details [log]="selectedLog"></app-log-details>
+      <app-log-details
+        [log]="selectedLog"
+        [selectedDate]="selectedDate">
+      </app-log-details>
     </div>
+  </div>
+  <div class="modal-mail-container">
+    <app-modal-mail></app-modal-mail>
   </div>
 </div>
 <div class="navbar-container">

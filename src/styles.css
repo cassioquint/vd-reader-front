@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+.informative {
+    margin-left: .5rem;
+    cursor: pointer;
+    color: #6d88d8;
+    font-size: 12pt;
+}
+
+.inline {
+    display: inline;
+}
